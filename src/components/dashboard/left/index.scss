@@ -53,6 +53,9 @@
     transition: 0.1s;
     width: 0;
     overflow-x: hidden;
+    position: absolute;
+    margin-left: 37px;
+    z-index: 10;
 
     span {
       color: #fff;

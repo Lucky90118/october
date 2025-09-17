@@ -3,7 +3,7 @@ import Left from '../../components/dashboard/left';
 import Right from '../../components/dashboard/right';
 import './index.scss';
 
-const Dashboard = () => {
+const DashboardPage = () => {
     
     return (
         <div className='dashboard'>
@@ -13,4 +13,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard;
+export default DashboardPage;

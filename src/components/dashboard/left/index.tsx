@@ -18,13 +18,13 @@ const Left = () => {
 
   return (
     <div className='dashboard-left' >
-      <div className='left-slide-control' onClick={ () => slideCick()}>
+      <div className='left-slide-control' >
         <div className='top'>
           <div className='logo'>
             <img src={logo} alt='logo' />
           </div>
         </div>
-        <div className='left-slide'>
+        <div className='left-slide' onClick={ () => slideCick()}>
           <div className='left-slide-button'>
             <img src={arrowRight} alt='arrowRight' style={{
               transform: flag ? "rotate(180deg)" : "rotate(0deg)"
