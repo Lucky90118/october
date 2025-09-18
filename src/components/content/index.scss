@@ -8,6 +8,10 @@
   background-size: 100% 100%;
   margin: auto;
 
+  img{
+    cursor: pointer;
+  }
+
   .headerImg {
     position: absolute;
     width: calc(100vw - 37px);

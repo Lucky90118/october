@@ -13,6 +13,7 @@ interface CupCellProps {
 }
 
 const CupCell: React.FC<CupCellProps> = ({ active, onClick }) => {
+  
   return (
     <div
       className="cupcell-container"
