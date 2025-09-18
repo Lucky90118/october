@@ -1,24 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./index.scss";
 import CupCell from "../cupcell";
 import ContentList from "../contentList";
 import headerImg from "../../image/header.png";
 import endtotoalbeerImg from "../../image/endbeer1.png";
+import { BeerContext } from "../../context/beer";
+import { BeerI } from "../../types";
 
 const ContentComponents: React.FC = () => {
   const [bet, setBet] = useState(10);
   const [balance, setBalance] = useState(5000);
   const [win, setWin] = useState(10);
-  const [activeCups, setActiveCups] = useState<boolean[]>([
-    false,
-    false,
-    true,
-    false,
-    false,
-  ]);
-  const addbeerClick = (idx: number) => {    
-    setActiveCups((prev) => prev.map((cup, i) => (i === idx && i !== 2 && cup === false ? !cup : cup)));
-  };
+  const { beers, setBeers } = useContext(BeerContext)!;
+
+ 
 
   return (
     <div className="contnet-components">
@@ -28,11 +23,10 @@ const ContentComponents: React.FC = () => {
         <div className="content-body">
           <div className="cups">
             <div className="cup-cells">
-              {[0, 1, 2, 3, 4].map((idx) => (
+              {beers.map((value: BeerI, index: number) => (
                 <CupCell
-                  key={idx}
-                  active={activeCups[idx]} // pass active state
-                  onClick={() => addbeerClick(idx)}
+                  key={index}
+                  activate={value}
                 />
               ))}
             </div>

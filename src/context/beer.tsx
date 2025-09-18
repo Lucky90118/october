@@ -26,7 +26,7 @@ export const BeerProvider: React.FC<BeerProviderProps> = ({ children }) => {
   const [beers, setBeers] = useState<BeerI[]>([
     { id: "a", value: 2, check: false, flag: false },
     { id: "b", value: 2, check: false, flag: false },
-    { id: "c", value: 2, check: false, flag: false },
+    { id: "c", value: 2, check: false, flag: true },
     { id: "d", value: 2, check: false, flag: false },
     { id: "e", value: 2, check: false, flag: false },
   ]);
