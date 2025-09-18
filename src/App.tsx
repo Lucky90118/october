@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import DashboardPage from "./pages/dashboard";
 import ContentPage from "./pages/content";
 
+
 function App() {
   return (
       <Router>
