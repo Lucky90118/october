@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import { FaBoxesStacked } from 'react-icons/fa6';
 import './index.scss';
-import logo from '../../../image/logo.svg';
-import arrowRight from '../../../image/arrowright.png';
+import logo from '../../image/logo.svg';
+import arrowRight from '../../image/arrowright.png';
 
 const Left = () => {
   const [likeCount, setLikeCount] = useState(0);

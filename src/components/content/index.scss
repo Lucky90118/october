@@ -1,0 +1,107 @@
+.contnet-components {
+  width: calc(100vw - 37px);
+  display: flex;
+  flex-direction: column;
+  background-image: url(../../image/background1.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  margin: auto;
+
+  .headerImg {
+    position: absolute;
+    width: calc(100vw - 37px);
+    height: 46px;
+    z-index: 1;
+  }
+
+  .content-component {
+    display: flex;
+
+    .content-body {
+      display: flex;
+      flex-direction: column;
+      background-repeat: no-repeat;
+      background-size: 100% 46px;
+      width: calc(100vw - 4%);
+      z-index: 5;
+
+      .cups {
+        width: 96%;
+
+        .cup-cells {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          margin: auto;
+        }
+      }
+    }
+
+    .content-bottom {
+      width: 90%;
+      display: flex;
+      box-sizing: border-box;
+      padding: 2vh 0;
+      gap: 10vw;
+
+      p {
+        color: #fff;
+        margin: 0;
+        font-size: 1.4vw;
+      }
+
+      .content-bet {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 37.5%;
+
+        .content-bet-sell{
+          text-align: center;
+          .content-bet-control {
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            padding: 0.5vh 1vw;
+            background-color: rgba(0, 0, 0, 0.575);
+            border-radius: 60px;
+            gap: 2vw;
+            padding: 0.3vh 1vw;
+            font-weight: 700;
+          }
+
+        }
+
+      }
+
+      .end-beer-control {
+        img {
+          width: 7vw;
+        }
+      }
+
+      .content-balance {
+        display: flex;
+        gap: 2vw;
+
+        .content-balance-sell {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+
+          .content-balance-control {
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            padding: 0.3vh 2vw;
+            background-color: rgba(0, 0, 0, 0.575);
+            border-radius: 60px;
+            gap: 2vw;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+}
