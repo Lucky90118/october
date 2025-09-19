@@ -1,8 +1,7 @@
 export interface BeerI {
   id: string;
   value: number;
-  check: boolean;
-  flag: boolean;
+  state: string;
 }
 
 export interface Balance {

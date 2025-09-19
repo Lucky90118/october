@@ -24,11 +24,11 @@ interface BeerProviderProps {
 
 export const BeerProvider: React.FC<BeerProviderProps> = ({ children }) => {
   const [beers, setBeers] = useState<BeerI[]>([
-    { id: "a", value: 0, check: true, flag: false },
-    { id: "b", value: 0, check: true, flag: false },
-    { id: "c", value: 0, check: true, flag: true },
-    { id: "d", value: 0, check: true, flag: false },
-    { id: "e", value: 0, check: true, flag: false },
+    { id: "a", value: 0,  state: "first" },
+    { id: "b", value: 0,  state: "first" },
+    { id: "c", value: 0,  state: "second" },
+    { id: "d", value: 0,  state: "first" },
+    { id: "e", value: 0,  state: "first" },
   ]);
 
   const value = { beers, setBeers };

@@ -9,7 +9,6 @@ import cup3Img from "../../image/cup3.png";
 import EndbeerImg from "../../image/endbeer.png";
 import AddbeerImg from "../../image/addbeer.png";
 import pipes1IMG from "../../image/pipes1.png";
-import nowinIMG from "../../image/nowin.png";
 import { BeerContext } from "../../context/beer";
 import { BeerI } from "../../types";
 
@@ -23,7 +22,7 @@ const CupCell: React.FC<CupCellProps> = ({ activate }) => {
   // add glass
   const addGlassClick = (id: string) => {
     const updateBeer = beers.map((value) => {
-      return value.id === id ? { ...value, flag: true } : value;
+      return value.id === id ? { ...value, state: "second" } : value;
     });
     setBeers(updateBeer);
   };
@@ -65,113 +64,24 @@ const CupCell: React.FC<CupCellProps> = ({ activate }) => {
           beerFlag === 12 ||
           beerFlag === 30 ||
           beerFlag === 100
-          ? { ...item, value: beerFlag }
-          : { ...item, check: false }
+          ? { ...item, value: beerFlag, state: "third" }
+          : { ...item, value: 0, state: "fourth" }
         : { ...item };
     });
     setBeers(updateBeerData);
   };
 
   // Have a beer in a selected cup
+  const endBeerClick = (id: string, value: number) => {
+    const endBeerData = beers.map((item) => {
+      return item.id === id ? { ...item, state: "fifth" } : item;
+    });
+    setBeers(endBeerData);
+  };
 
   return (
     <div className="cupcell-container">
-      {activate.flag ? (
-        !activate.check ? (
-          <div className="cupcell-container-item">
-            <img
-              className="cupcell-container-top"
-              src={pipes1IMG}
-              alt="pipes1IMG"
-            />
-            <div className="cupcell-container-body">
-              <img className="emptyGlassImg" src={nowinIMG} alt="AddbeerImg" />
-              <div className="cupcell-container-control">
-                <img
-                  className="AddbeerImg"
-                  src={AddbeerImg}
-                  alt="AddbeerImg"
-                  style={{ opacity: 0 }}
-                />
-                <img
-                  className="EndbeerImg"
-                  src={EndbeerImg}
-                  alt="EndbeerImg"
-                  style={{ opacity: 0 }}
-                />
-              </div>
-            </div>
-          </div>
-        ) : activate.value === 0 ? (
-          <div className="cupcell-container-item">
-            <img
-              className="cupcell-container-top"
-              src={pipes1IMG}
-              alt="pipes1IMG"
-            />
-            <div className="cupcell-container-body">
-              <img className="emptyGlassImg" src={cup0Img} alt="AddbeerImg" />
-              <div className="cupcell-container-control">
-                <img
-                  className="AddbeerImg"
-                  src={AddbeerImg}
-                  alt="AddbeerImg"
-                  onClick={() => addBeerClick(activate.id, activate.value)}
-                />
-                <img
-                  className="EndbeerImg"
-                  src={EndbeerImg}
-                  alt="EndbeerImg"
-                  style={{ opacity: 0.5 }}
-                />
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="cupcell-container-item">
-            <img
-              className="cupcell-container-top"
-              src={pipes1IMG}
-              alt="pipes1IMG"
-            />
-            <div className="cupcell-container-body">
-              {activate.value === 2 ? (
-                <img className="emptyGlassImg" src={cup1Img} alt="AddbeerImg" />
-              ) : activate.value === 5 ? (
-                <img className="emptyGlassImg" src={cup2Img} alt="AddbeerImg" />
-              ) : activate.value === 12 ? (
-                <img className="emptyGlassImg" src={cup3Img} alt="AddbeerImg" />
-              ) : activate.value === 30 ? (
-                <img className="emptyGlassImg" src={cup3Img} alt="AddbeerImg" />
-              ) : (
-                <img className="emptyGlassImg" src={cup3Img} alt="AddbeerImg" />
-              )}
-              <div className="cupcell-container-control">
-                <img
-                  className="AddbeerImg"
-                  src={AddbeerImg}
-                  alt="AddbeerImg"
-                  onClick={() => addBeerClick(activate.id, activate.value)}
-                />
-                {activate.value === 0 ? (
-                  <img
-                    className="EndbeerImg"
-                    src={EndbeerImg}
-                    alt="EndbeerImg"
-                    style={{ opacity: 0.5 }}
-                  />
-                ) : (
-                  <img
-                    className="EndbeerImg"
-                    src={EndbeerImg}
-                    alt="EndbeerImg"
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-        )
-      ) : (
+      {activate.state === "first" ? (
         <div className="cupcell-container-item">
           <img
             className="cupcell-container-top"
@@ -180,14 +90,147 @@ const CupCell: React.FC<CupCellProps> = ({ activate }) => {
           />
           <div className="cupcell-container-body">
             <img
-              className="emptyGlassImg"
+              className="AddbeerImg"
               src={crossImg}
               alt="AddbeerImg"
               onClick={() => addGlassClick(activate.id)}
             />
             <div className="cupcell-container-control">
-              <img className="AddbeerImg" src={AddbeerImg} alt="AddbeerImg" />
-              <img className="EndbeerImg" src={EndbeerImg} alt="EndbeerImg" style={{opacity:0.5}}/>
+              <img
+                className="AddbeerImg"
+                src={AddbeerImg}
+                alt="AddbeerImg"
+                style={{ opacity: 0 }}
+              />
+              <img
+                className="EndbeerImg"
+                src={EndbeerImg}
+                alt="EndbeerImg"
+                style={{ opacity: 0 }}
+              />
+            </div>
+          </div>
+        </div>
+      ) : activate.state === "second" ? (
+        <div className="cupcell-container-item">
+          <img
+            className="cupcell-container-top"
+            src={pipes1IMG}
+            alt="pipes1IMG"
+          />
+          <div className="cupcell-container-body">
+            <img className="emptyGlassImg" src={cup0Img} alt="AddbeerImg" />
+            <div className="cupcell-container-control">
+              <img
+                className="AddbeerImg"
+                src={AddbeerImg}
+                alt="AddbeerImg"
+                onClick={() => addBeerClick(activate.id, activate.value)}
+              />
+              <img
+                className="EndbeerImg"
+                src={EndbeerImg}
+                alt="EndbeerImg"
+                style={{ opacity: 0.5 }}
+              />
+            </div>
+          </div>
+        </div>
+      ) : activate.state === "third" ? (
+        <div className="cupcell-container-item">
+          <img
+            className="cupcell-container-top"
+            src={pipes1IMG}
+            alt="pipes1IMG"
+          />
+          <div className="cupcell-container-body">
+            {activate.value === 2 ? (
+              <img className="emptyGlassImg" src={cup1Img} alt="AddbeerImg" />
+            ) : activate.value === 5 ? (
+              <img className="emptyGlassImg" src={cup2Img} alt="AddbeerImg" />
+            ) : activate.value === 12 ? (
+              <img className="emptyGlassImg" src={cup3Img} alt="AddbeerImg" />
+            ) : activate.value === 30 ? (
+              <img className="emptyGlassImg" src={cup3Img} alt="AddbeerImg" />
+            ) : (
+              <img className="emptyGlassImg" src={cup3Img} alt="AddbeerImg" />
+            )}
+            <div className="cupcell-container-control">
+              <img
+                className="AddbeerImg"
+                src={AddbeerImg}
+                alt="AddbeerImg"
+                onClick={() => addBeerClick(activate.id, activate.value)}
+              />
+              {activate.value === 0 ? (
+                <img
+                  className="EndbeerImg"
+                  src={EndbeerImg}
+                  alt="EndbeerImg"
+                  style={{ opacity: 0.5 }}
+                />
+              ) : (
+                <img
+                  className="EndbeerImg"
+                  src={EndbeerImg}
+                  alt="EndbeerImg"
+                  onClick={() => endBeerClick(activate.id, activate.value)}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      ) : activate.state === "fourth" ? (
+        <div className="cupcell-container-item">
+          <img
+            className="cupcell-container-top"
+            src={pipes1IMG}
+            alt="pipes1IMG"
+          />
+          <div className="cupcell-container-body">
+            <div className="Under">
+              <p>NO WIN</p>
+            </div>
+            <div className="cupcell-container-control">
+              <img
+                className="AddbeerImg"
+                src={AddbeerImg}
+                alt="AddbeerImg"
+                style={{ opacity: 0 }}
+              />
+              <img
+                className="EndbeerImg"
+                src={EndbeerImg}
+                alt="EndbeerImg"
+                style={{ opacity: 0 }}
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="cupcell-container-item">
+          <img
+            className="cupcell-container-top"
+            src={pipes1IMG}
+            alt="pipes1IMG"
+          />
+          <div className="cupcell-container-body">
+            <div className="Under">
+              <p>{activate.value}</p>
+            </div>
+            <div className="cupcell-container-control">
+              <img
+                className="AddbeerImg"
+                src={AddbeerImg}
+                alt="AddbeerImg"
+                style={{ opacity: 0 }}
+              />
+              <img
+                className="EndbeerImg"
+                src={EndbeerImg}
+                alt="EndbeerImg"
+                style={{ opacity: 0 }}
+              />
             </div>
           </div>
         </div>
