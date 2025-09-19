@@ -1,239 +1,44 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./index.scss";
 
-import crossImg from "../../image/cross.png";
-import cup0Img from "../../image/cup0.png";
-import cup1Img from "../../image/cup1.png";
-import cup2Img from "../../image/cup2.png";
-import cup3Img from "../../image/cup3.png";
-import EndbeerImg from "../../image/endbeer.png";
-import AddbeerImg from "../../image/addbeer.png";
-import pipes1IMG from "../../image/pipes1.png";
-import { BeerContext } from "../../context/beer";
-import { BeerI } from "../../types";
+import FirstStateComponent from "../first";
+import { CupCellPropsI } from "../../types";
+import SecondStateComponent from "../second";
+import ThirdStateComponent from "../third";
+import FourthStateComponent from "../fourth";
+import FifthStateComponent from "../fifth";
 
-interface CupCellProps {
-  activate: BeerI;
-}
-
-const CupCell: React.FC<CupCellProps> = ({ activate }) => {
-  const { beers, setBeers } = useContext(BeerContext)!;
-
-  // add glass
-  const addGlassClick = (id: string) => {
-    const updateBeer = beers.map((value) => {
-      return value.id === id ? { ...value, state: "second" } : value;
-    });
-    setBeers(updateBeer);
-  };
-
-  // Beer is poured into the selected cup.
-  const addBeerClick = (id: string, value: number) => {
-    let beerFlag: number = 0;
-    if (value === 0) {
-      beerFlag =
-        Math.floor(Math.random() * 2) + 1 < 0.48
-          ? 2
-          : Math.floor(Math.random() * 2) + 1;
-    } else if (value === 2) {
-      beerFlag =
-        Math.floor(Math.random() * 5) + 1 < 0.18
-          ? 5
-          : Math.floor(Math.random() * 5) + 1;
-    } else if (value === 5) {
-      beerFlag =
-        Math.floor(Math.random() * 12) + 1 < 0.081
-          ? 12
-          : Math.floor(Math.random() * 12) + 1;
-    } else if (value === 12) {
-      beerFlag =
-        Math.floor(Math.random() * 30) + 1 < 0.031
-          ? 30
-          : Math.floor(Math.random() * 30) + 1;
-    } else if (value === 30) {
-      beerFlag =
-        Math.floor(Math.random() * 100) + 1 < 0.0098
-          ? 100
-          : Math.floor(Math.random() * 100) + 1;
-    }
-
-    const updateBeerData = beers.map((item) => {
-      return item.id === id
-        ? beerFlag === 2 ||
-          beerFlag === 5 ||
-          beerFlag === 12 ||
-          beerFlag === 30 ||
-          beerFlag === 100
-          ? { ...item, value: beerFlag, state: "third" }
-          : { ...item, value: 0, state: "fourth" }
-        : { ...item };
-    });
-    setBeers(updateBeerData);
-  };
-
-  // Have a beer in a selected cup
-  const endBeerClick = (id: string, value: number) => {
-    const endBeerData = beers.map((item) => {
-      return item.id === id ? { ...item, state: "fifth" } : item;
-    });
-    setBeers(endBeerData);
-  };
+const CupCell: React.FC<CupCellPropsI> = ({
+  activate,
+  bet,
+  balance,
+  setBalance,
+}) => {
 
   return (
     <div className="cupcell-container">
       {activate.state === "first" ? (
-        <div className="cupcell-container-item">
-          <img
-            className="cupcell-container-top"
-            src={pipes1IMG}
-            alt="pipes1IMG"
-          />
-          <div className="cupcell-container-body">
-            <img
-              className="AddbeerImg"
-              src={crossImg}
-              alt="AddbeerImg"
-              onClick={() => addGlassClick(activate.id)}
-            />
-            <div className="cupcell-container-control">
-              <img
-                className="AddbeerImg"
-                src={AddbeerImg}
-                alt="AddbeerImg"
-                style={{ opacity: 0 }}
-              />
-              <img
-                className="EndbeerImg"
-                src={EndbeerImg}
-                alt="EndbeerImg"
-                style={{ opacity: 0 }}
-              />
-            </div>
-          </div>
-        </div>
+        <FirstStateComponent id={activate.id} />
       ) : activate.state === "second" ? (
-        <div className="cupcell-container-item">
-          <img
-            className="cupcell-container-top"
-            src={pipes1IMG}
-            alt="pipes1IMG"
-          />
-          <div className="cupcell-container-body">
-            <img className="emptyGlassImg" src={cup0Img} alt="AddbeerImg" />
-            <div className="cupcell-container-control">
-              <img
-                className="AddbeerImg"
-                src={AddbeerImg}
-                alt="AddbeerImg"
-                onClick={() => addBeerClick(activate.id, activate.value)}
-              />
-              <img
-                className="EndbeerImg"
-                src={EndbeerImg}
-                alt="EndbeerImg"
-                style={{ opacity: 0.5 }}
-              />
-            </div>
-          </div>
-        </div>
+        <SecondStateComponent
+          id={activate.id}
+          value={activate.value}
+          balance={balance}
+          bet={bet}
+          setBalance={setBalance}
+        />
       ) : activate.state === "third" ? (
-        <div className="cupcell-container-item">
-          <img
-            className="cupcell-container-top"
-            src={pipes1IMG}
-            alt="pipes1IMG"
-          />
-          <div className="cupcell-container-body">
-            {activate.value === 2 ? (
-              <img className="emptyGlassImg" src={cup1Img} alt="AddbeerImg" />
-            ) : activate.value === 5 ? (
-              <img className="emptyGlassImg" src={cup2Img} alt="AddbeerImg" />
-            ) : activate.value === 12 ? (
-              <img className="emptyGlassImg" src={cup3Img} alt="AddbeerImg" />
-            ) : activate.value === 30 ? (
-              <img className="emptyGlassImg" src={cup3Img} alt="AddbeerImg" />
-            ) : (
-              <img className="emptyGlassImg" src={cup3Img} alt="AddbeerImg" />
-            )}
-            <div className="cupcell-container-control">
-              <img
-                className="AddbeerImg"
-                src={AddbeerImg}
-                alt="AddbeerImg"
-                onClick={() => addBeerClick(activate.id, activate.value)}
-              />
-              {activate.value === 0 ? (
-                <img
-                  className="EndbeerImg"
-                  src={EndbeerImg}
-                  alt="EndbeerImg"
-                  style={{ opacity: 0.5 }}
-                />
-              ) : (
-                <img
-                  className="EndbeerImg"
-                  src={EndbeerImg}
-                  alt="EndbeerImg"
-                  onClick={() => endBeerClick(activate.id, activate.value)}
-                />
-              )}
-            </div>
-          </div>
-        </div>
+        <ThirdStateComponent
+          id={activate.id}
+          value={activate.value}
+          balance={balance}
+          bet={bet}
+          setBalance={setBalance}
+        />
       ) : activate.state === "fourth" ? (
-        <div className="cupcell-container-item">
-          <img
-            className="cupcell-container-top"
-            src={pipes1IMG}
-            alt="pipes1IMG"
-          />
-          <div className="cupcell-container-body">
-            <div className="Under">
-              <p>NO WIN</p>
-            </div>
-            <div className="cupcell-container-control">
-              <img
-                className="AddbeerImg"
-                src={AddbeerImg}
-                alt="AddbeerImg"
-                style={{ opacity: 0 }}
-              />
-              <img
-                className="EndbeerImg"
-                src={EndbeerImg}
-                alt="EndbeerImg"
-                style={{ opacity: 0 }}
-              />
-            </div>
-          </div>
-        </div>
+        <FourthStateComponent />
       ) : (
-        <div className="cupcell-container-item">
-          <img
-            className="cupcell-container-top"
-            src={pipes1IMG}
-            alt="pipes1IMG"
-          />
-          <div className="cupcell-container-body">
-            <div className="Under">
-              <p>{activate.value}</p>
-            </div>
-            <div className="cupcell-container-control">
-              <img
-                className="AddbeerImg"
-                src={AddbeerImg}
-                alt="AddbeerImg"
-                style={{ opacity: 0 }}
-              />
-              <img
-                className="EndbeerImg"
-                src={EndbeerImg}
-                alt="EndbeerImg"
-                style={{ opacity: 0 }}
-              />
-            </div>
-          </div>
-        </div>
+        <FifthStateComponent value={activate.value}/>
       )}
     </div>
   );

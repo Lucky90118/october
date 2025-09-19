@@ -7,10 +7,11 @@ import endtotoalbeerImg from "../../image/endbeer1.png";
 import { BeerContext } from "../../context/beer";
 import { BeerI } from "../../types";
 
+
 const ContentComponents: React.FC = () => {
   const [bet, setBet] = useState(1);
-  const [balance, setBalance] = useState(5400);
-  const [win, setWin] = useState(10);
+  const [balance, setBalance] = useState(5000);
+  const [win, setWin] = useState(0);
   const { beers, setBeers } = useContext(BeerContext)!;
 
   const addBetButtonClick = (symbol: string) => {
@@ -68,7 +69,7 @@ const ContentComponents: React.FC = () => {
           <div className="cups">
             <div className="cup-cells">
               {beers.map((value: BeerI, index: number) => (
-                <CupCell key={index} activate={value} />
+                <CupCell key={index} activate={value} balance = {balance} bet={bet} setBalance={setBalance} />
               ))}
             </div>
           </div>
@@ -93,7 +94,7 @@ const ContentComponents: React.FC = () => {
                 </div>
                 <p>BALANCE</p>
               </div>
-              {win < 0 ? (
+              {win <= 0 ? (
                 ""
               ) : (
                 <div className="content-balance-sell">
