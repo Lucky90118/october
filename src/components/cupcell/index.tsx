@@ -20,6 +20,7 @@ interface CupCellProps {
 const CupCell: React.FC<CupCellProps> = ({ activate }) => {
   const { beers, setBeers } = useContext(BeerContext)!;
 
+  // add glass
   const addGlassClick = (id: string) => {
     const updateBeer = beers.map((value) => {
       return value.id === id ? { ...value, flag: true } : value;
@@ -27,6 +28,7 @@ const CupCell: React.FC<CupCellProps> = ({ activate }) => {
     setBeers(updateBeer);
   };
 
+  // Beer is poured into the selected cup.
   const addBeerClick = (id: string, value: number) => {
     let beerFlag: number = 0;
     if (value === 0) {
@@ -68,7 +70,9 @@ const CupCell: React.FC<CupCellProps> = ({ activate }) => {
         : { ...item };
     });
     setBeers(updateBeerData);
-  };  
+  };
+
+  // Have a beer in a selected cup
 
   return (
     <div className="cupcell-container">
@@ -114,7 +118,12 @@ const CupCell: React.FC<CupCellProps> = ({ activate }) => {
                   alt="AddbeerImg"
                   onClick={() => addBeerClick(activate.id, activate.value)}
                 />
-                <img className="EndbeerImg" src={EndbeerImg} alt="EndbeerImg" />
+                <img
+                  className="EndbeerImg"
+                  src={EndbeerImg}
+                  alt="EndbeerImg"
+                  style={{ opacity: 0.5 }}
+                />
               </div>
             </div>
           </div>
@@ -144,7 +153,20 @@ const CupCell: React.FC<CupCellProps> = ({ activate }) => {
                   alt="AddbeerImg"
                   onClick={() => addBeerClick(activate.id, activate.value)}
                 />
-                <img className="EndbeerImg" src={EndbeerImg} alt="EndbeerImg" />
+                {activate.value === 0 ? (
+                  <img
+                    className="EndbeerImg"
+                    src={EndbeerImg}
+                    alt="EndbeerImg"
+                    style={{ opacity: 0.5 }}
+                  />
+                ) : (
+                  <img
+                    className="EndbeerImg"
+                    src={EndbeerImg}
+                    alt="EndbeerImg"
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -165,7 +187,7 @@ const CupCell: React.FC<CupCellProps> = ({ activate }) => {
             />
             <div className="cupcell-container-control">
               <img className="AddbeerImg" src={AddbeerImg} alt="AddbeerImg" />
-              <img className="EndbeerImg" src={EndbeerImg} alt="EndbeerImg" />
+              <img className="EndbeerImg" src={EndbeerImg} alt="EndbeerImg" style={{opacity:0.5}}/>
             </div>
           </div>
         </div>
