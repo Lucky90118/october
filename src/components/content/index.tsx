@@ -8,14 +8,57 @@ import { BeerContext } from "../../context/beer";
 import { BeerI } from "../../types";
 
 const ContentComponents: React.FC = () => {
-  const [bet, setBet] = useState(10);
-  const [balance, setBalance] = useState(5000);
+  const [bet, setBet] = useState(1);
+  const [balance, setBalance] = useState(5400);
   const [win, setWin] = useState(10);
   const { beers, setBeers } = useContext(BeerContext)!;
 
-  const addBetButtonClick = () => {
-    
-  }
+  const addBetButtonClick = (symbol: string) => {
+    if (symbol === "+") {
+      if (bet < 10) {
+        if (bet !== 5) {
+          bet + 1 > balance ? setBet(bet) : setBet(bet + 1);
+        } else {
+          10 > balance ? setBet(5) : setBet(10);
+        }
+      } else if (
+        bet < 5 * Math.pow(10, Math.floor(Math.log10(bet))) &&
+        bet < balance
+      ) {
+        bet + Math.pow(10, Math.floor(Math.log10(bet))) > balance
+          ? setBet(bet)
+          : setBet(bet + Math.pow(10, Math.floor(Math.log10(bet))));
+      } else if (
+        bet === 5 * Math.pow(10, Math.floor(Math.log10(bet))) &&
+        bet <= balance
+      ) {
+        7.5 * Math.pow(10, Math.floor(Math.log10(bet))) > balance
+          ? setBet(bet)
+          : setBet(7.5 * Math.pow(10, Math.floor(Math.log10(bet))));
+      } else if (
+        bet === 7.5 * Math.pow(10, Math.floor(Math.log10(bet))) &&
+        bet <= balance
+      ) {
+        Math.pow(10, Math.floor(Math.log10(bet) + 1)) > balance
+          ? setBet(bet)
+          : setBet(Math.pow(10, Math.floor(Math.log10(bet) + 1)));
+      }
+    } else if (symbol === "-") {
+      if (bet > 1) {
+        if (bet < 10) {
+          setBet(bet - 1);
+        } else if (bet === 10) {
+          setBet(5);
+        } else if (bet === Math.pow(10, Math.floor(Math.log10(bet)))) {
+          setBet(7.5 * Math.pow(10, Math.floor(Math.log10(bet)) - 1));
+        } else if (bet === 7.5 * Math.pow(10, Math.floor(Math.log10(bet)))) {
+          setBet(5 * Math.pow(10, Math.floor(Math.log10(bet))));
+        } else if (bet <= 5 * Math.pow(10, Math.floor(Math.log10(bet)))) {
+          setBet(bet - Math.pow(10, Math.floor(Math.log10(bet))));
+        }
+      }
+    }
+  };
   return (
     <div className="contnet-components">
       <img className="headerImg" src={headerImg} alt="headerImg" />
@@ -25,10 +68,7 @@ const ContentComponents: React.FC = () => {
           <div className="cups">
             <div className="cup-cells">
               {beers.map((value: BeerI, index: number) => (
-                <CupCell
-                  key={index}
-                  activate={value}
-                />
+                <CupCell key={index} activate={value} />
               ))}
             </div>
           </div>
@@ -36,9 +76,9 @@ const ContentComponents: React.FC = () => {
             <div className="content-bet">
               <div className="content-bet-sell">
                 <div className="content-bet-control">
-                  <p>-</p>
+                  <p onClick={() => addBetButtonClick("-")}>-</p>
                   <p>DEM {bet}</p>
-                  <p>+</p>
+                  <p onClick={() => addBetButtonClick("+")}>+</p>
                 </div>
                 <p>BET</p>
               </div>
@@ -70,7 +110,5 @@ const ContentComponents: React.FC = () => {
     </div>
   );
 };
-
-
 
 export default ContentComponents;
