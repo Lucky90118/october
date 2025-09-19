@@ -4,3 +4,8 @@ export interface BeerI {
   check: boolean;
   flag: boolean;
 }
+
+export interface Balance {
+  balance: number;
+
+}

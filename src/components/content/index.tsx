@@ -13,8 +13,9 @@ const ContentComponents: React.FC = () => {
   const [win, setWin] = useState(10);
   const { beers, setBeers } = useContext(BeerContext)!;
 
- 
-
+  const addBetButtonClick = () => {
+    
+  }
   return (
     <div className="contnet-components">
       <img className="headerImg" src={headerImg} alt="headerImg" />
@@ -69,5 +70,7 @@ const ContentComponents: React.FC = () => {
     </div>
   );
 };
+
+
 
 export default ContentComponents;

@@ -1,65 +1,50 @@
 .cupcell-container {
   width: 17.5%;
   display: flex;
-  align-items: flex-end;
   justify-content: center;
   box-sizing: border-box;
 
-  img{
+  img {
     cursor: pointer;
   }
 
-  
-  
-  .add-glass {
-    height: 100%;
+  .cupcell-container-item {
     display: flex;
+    height: 41.9vw;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    box-sizing: border-box;
-    
-    .beer-pipes {
+
+    .cupcell-container-top {
       width: 3.2vw;
     }
 
-    .add-beer-but {
-      width: 9vw;
-      margin-bottom: 12vh;
-    }
-  }
-
-  .add-beer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
-
-    .beer-pipes {
-      width: 3.2vw;
-    }
-
-    .empty-glass {
-      margin-top: 7.2vh;
-      width: 83%;
-    }
-
-    .cup-under-control {
+    .cupcell-container-body {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      justify-content: flex-end;
       align-items: center;
       gap: 1vw;
-      box-sizing: border-box;
-      padding: 2.9vh 0;
 
-      .add-beer-control {
-        width: 4vw;
+      .emptyGlassImg {
+        width: 10.5vw;
       }
 
-      .end-beer-control {
-        width: 2.5vw;
-        height: 2.5vw;
-        opacity: 0.5;
+      .cupcell-container-control {
+        display: flex;
+        justify-content: center;
+        gap: 1vw;
+        align-items: center;
+
+        .AddbeerImg {
+          width: 3.5vw;
+        }
+
+        .EndbeerImg {
+          width: 2vw;
+          height: 2vw;
+          opacity: 0.5;
+        }
       }
     }
   }
