@@ -55,7 +55,7 @@ const ThirdStateComponent: React.FC<ThirdStatePropsI> = ({
     ) {
       const TopMoneyData = beers.map((item: BeerI) => {
         return item.id === id
-          ? { ...item, value: beerFlag, state: "fifth", flag: true }
+          ? { ...item, value: beerFlag, state: "fifth" }
           : { ...item };
       });
       setBeers(TopMoneyData);

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useState, ReactNode } from "react";
 import { BeerI } from "../types";
 
 export type BeerContextType = {
@@ -18,7 +18,7 @@ export const BeerProvider: React.FC<BeerProviderProps> = ({ children }) => {
   const [beers, setBeers] = useState<BeerI[]>([
     { id: "a", value: 0,  state: "first", flag:false },
     { id: "b", value: 0,  state: "first", flag:false },
-    { id: "c", value: 0,  state: "second", flag:false },
+    { id: "c", value: 0,  state: "second", flag:true  },
     { id: "d", value: 0,  state: "first", flag:false },
     { id: "e", value: 0,  state: "first", flag:false },
   ]);

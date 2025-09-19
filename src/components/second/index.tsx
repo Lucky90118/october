@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { BeerContext } from "../../context/beer";
+import { CheckFlagContext } from "../../context/checkflag";
 import pipes1IMG from "../../image/pipes1.png";
 import cup0Img from "../../image/cup0.png";
 import AddbeerImg from "../../image/addbeer.png";
@@ -15,8 +16,10 @@ const SecondStateComponent: React.FC<SecondStatePropsI> = ({
   setBalance,
 }) => {
   const { beers, setBeers } = useContext(BeerContext)!;
+  const {setCheckFlag} = useContext(CheckFlagContext)!;
 
   const addBeerClick = (id: string, value: number) => {
+    setCheckFlag(true);
     let beerFlag: any;
     if (value === 0) {
       beerFlag =
