@@ -5,14 +5,16 @@ import ContentList from "../contentList";
 import headerImg from "../../image/header.png";
 import endtotoalbeerImg from "../../image/endbeer1.png";
 import { BeerContext } from "../../context/beer";
+import { CheckFlagContext } from "../../context/checkflag";
 import { BeerI } from "../../types";
-
 
 const ContentComponents: React.FC = () => {
   const [bet, setBet] = useState(1);
   const [balance, setBalance] = useState(5000);
   const [win, setWin] = useState(0);
   const { beers, setBeers } = useContext(BeerContext)!;
+  const { allBeerValue, checkFlag, setAllBeerValue } =
+    useContext(CheckFlagContext)!;
 
   const addBetButtonClick = (symbol: string) => {
     if (symbol === "+") {
@@ -69,7 +71,13 @@ const ContentComponents: React.FC = () => {
           <div className="cups">
             <div className="cup-cells">
               {beers.map((value: BeerI, index: number) => (
-                <CupCell key={index} activate={value} balance = {balance} bet={bet} setBalance={setBalance} />
+                <CupCell
+                  key={index}
+                  activate={value}
+                  balance={balance}
+                  bet={bet}
+                  setBalance={setBalance}
+                />
               ))}
             </div>
           </div>
@@ -77,15 +85,27 @@ const ContentComponents: React.FC = () => {
             <div className="content-bet">
               <div className="content-bet-sell">
                 <div className="content-bet-control">
-                  <p onClick={() => addBetButtonClick("-")}>-</p>
+                  {checkFlag ? (
+                    <p style={{ opacity: 0.4 }}> - </p>
+                  ) : (
+                    <p onClick={() => addBetButtonClick("-")}>-</p>
+                  )}
                   <p>DEM {bet}</p>
-                  <p onClick={() => addBetButtonClick("+")}>+</p>
+                  {checkFlag ? (
+                    <p style={{ opacity: 0.4 }}> + </p>
+                  ) : (
+                    <p onClick={() => addBetButtonClick("+")}> + </p>
+                  )}
                 </div>
                 <p>BET</p>
               </div>
             </div>
             <div className="end-beer-control">
-              <img src={endtotoalbeerImg} alt="endtotalbeerImg" />
+              {allBeerValue > 0 ? (
+                <p className="end-beer-control-p">COLLECT ALL</p>
+              ) : (
+                <img src={endtotoalbeerImg} alt="endtotalbeerImg" />
+              )}
             </div>
             <div className="content-balance">
               <div className="content-balance-sell">

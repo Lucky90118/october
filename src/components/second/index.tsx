@@ -16,7 +16,7 @@ const SecondStateComponent: React.FC<SecondStatePropsI> = ({
   setBalance,
 }) => {
   const { beers, setBeers } = useContext(BeerContext)!;
-  const {setCheckFlag} = useContext(CheckFlagContext)!;
+  const {allBeerValue, setCheckFlag, setAllBeerValue} = useContext(CheckFlagContext)!;
 
   const addBeerClick = (id: string, value: number) => {
     setCheckFlag(true);
@@ -55,6 +55,7 @@ const SecondStateComponent: React.FC<SecondStatePropsI> = ({
       beerFlag === 30 ||
       beerFlag === 100
     ) {
+      setAllBeerValue(allBeerValue + beerFlag);
       const TopMoneyData = beers.map((item: BeerI) => {
         return item.id === id
           ? { ...item, value: beerFlag, state: "fifth", flag: true }
