@@ -16,11 +16,18 @@ const SecondStateComponent: React.FC<SecondStatePropsI> = ({
   setBalance,
 }) => {
   const { beers, setBeers } = useContext(BeerContext)!;
-  const {allBeerValue, setCheckFlag, setAllBeerValue} = useContext(CheckFlagContext)!;
+  const {
+    allBeerValue,
+    setCheckFlag,
+    setBeerFlag,
+    setAllBeerValue,
+  } = useContext(CheckFlagContext)!;
 
   const addBeerClick = (id: string, value: number) => {
     setCheckFlag(true);
+    setBeerFlag(true);
     let beerFlag: any;
+    
     if (value === 0) {
       beerFlag =
         Math.floor(Math.random() * 2) + 1 < 0.48

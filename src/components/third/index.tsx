@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { BeerContext } from "../../context/beer";
+import { CheckFlagContext } from "../../context/checkflag";
 import { BeerI, ThirdStatePropsI } from "../../types";
 import cup1Img from "../../image/cup1.png";
 import cup2Img from "../../image/cup2.png";
@@ -16,6 +17,7 @@ const ThirdStateComponent: React.FC<ThirdStatePropsI> = ({
   setBalance,
 }) => {
   const { beers, setBeers } = useContext(BeerContext)!;
+  const { allBeerValue, setAllBeerValue } = useContext(CheckFlagContext)!;
 
   const addBeerClick = (id: string, value: number) => {
     let beerFlag: any;
@@ -78,6 +80,8 @@ const ThirdStateComponent: React.FC<ThirdStatePropsI> = ({
   };
 
   const endBeerClick = (id: string, value: number) => {
+    setBalance(balance + bet * value);
+    setAllBeerValue(allBeerValue - value);
     const endBeerData = beers.map((item) => {
       return item.id === id ? { ...item, state: "fifth", flag: true } : item;
     });

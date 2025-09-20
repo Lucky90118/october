@@ -13,7 +13,7 @@ const ContentComponents: React.FC = () => {
   const [balance, setBalance] = useState(5000);
   const [win, setWin] = useState(0);
   const { beers, setBeers } = useContext(BeerContext)!;
-  const { allBeerValue, checkFlag, setAllBeerValue } =
+  const { allBeerValue, beerCheck, checkFlag, setAllBeerValue } =
     useContext(CheckFlagContext)!;
 
   const addBetButtonClick = (symbol: string) => {
@@ -101,10 +101,12 @@ const ContentComponents: React.FC = () => {
               </div>
             </div>
             <div className="end-beer-control">
-              {allBeerValue > 0 ? (
+              {!beerCheck ? (
+                <img src={endtotoalbeerImg} alt="endtotalbeerImg" />
+              ) : allBeerValue > 0 ? (
                 <p className="end-beer-control-p">COLLECT ALL</p>
               ) : (
-                <img src={endtotoalbeerImg} alt="endtotalbeerImg" />
+                <p className="end-beer-control-p1">END ROUND</p>
               )}
             </div>
             <div className="content-balance">

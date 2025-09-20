@@ -46,7 +46,7 @@
       width: 90%;
       display: flex;
       box-sizing: border-box;
-      padding: 2.95vw 0 1.5vh;
+      padding: 2.92vw 0 1.5vh;
       gap: 7vw;
 
       p {
@@ -87,14 +87,23 @@
         justify-content: center;
         align-items: flex-start;
 
-        .end-beer-control-p{
+        p{
           box-sizing: border-box;
           margin: 0;
-          padding: 0.5vw 3vw;
-          background-color: #030303ea;
+          padding: 0.5vw 2.2vw;
           border-radius: 50px;
+          font-size: 1.3vw;
+        }
+
+        .end-beer-control-p{
+          background-color: #030303ea;
           color: #fff;
           border: 1px solid #fff;
+        }
+
+        .end-beer-control-p1{
+          background-color: #ffffffea;
+          color: #000000;
         }
 
         img {
